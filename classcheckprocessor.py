@@ -44,13 +44,11 @@ def handler(event, context):
         # Update attendance record if absent
         if not attendance_exists:
             new_entry = {
-                "M": {
-                    "data": {"S": today},
-                    "dia": {"S": datetime.now(pytz.timezone('America/Sao_Paulo')).strftime('%A').lower()},
-                    "hora": {"S": datetime.now(pytz.timezone('America/Sao_Paulo')).strftime('%H:%M')},
-                    "id_historico": {"N": str(len(history) + 1)},
-                    "presente": {"BOOL": False}
-                }
+                "data": today,
+                "dia": datetime.now(pytz.timezone('America/Sao_Paulo')).strftime('%A').lower(),
+                "hora": datetime.now(pytz.timezone('America/Sao_Paulo')).strftime('%H:%M'),
+                "id_historico": str(len(history) + 1),
+                "presente": False
             }
             history.append(new_entry)
 
